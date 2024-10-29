@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Safetrack Data Overview</title>
+    <link rel="stylesheet" href="admindashboard.css">
+    <style>
+        /* Styles for the admindashboard page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+        #backgroundVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Place the video behind everything */
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            position: relative; /* Set position relative for child elements */
+            z-index: 1; /* Bring the content in front of the video */
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-button {
+            width: 100px; /* Adjusted width for a smaller logo */
+        }
+        h1 {
+            font-size: 24px;
+            color: white; /* Change the heading color to white */
+        }
+        .back-button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #e53935;
+        }
+        .scrollable-table {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white; /* Set the background color of the table to white */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50; /* Header color */
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="img/home gif background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <header>
+            <a href="home.html">
+                <img src="img/safetrack.png.png" alt="Safetrack Logo" class="logo-button">
+            </a>
+            <h1>Safetrack Data Overview</h1>
+            <button class="back-button" onclick="location.href='adminsearch.html'">Back</button>
+        </header>
+
+        <div class="scrollable-table">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Time</th>
+                        <th>Maktab</th>
+                        <th>Flight Number</th>
+                        <th>Mutawwif</th>
+                        <th>Mutawwif Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data rows will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function populateTable() {
+            const name = getQueryParam('name');
+            const table = document.getElementById("dataTable").getElementsByTagName('tbody')[0];
+            const userData = [
+                { name: "Amirhaziq Mukhriz bin Mohtee", latitude: "2.90034", longitude: "101.863", time: "2024-10-27 19:28:05", maktab: "Rimbunan Impian Travel & Tour", flight: "XY123", mutawwif: "Ali bin Abu", mutawwifNumber: "0123456789" },
+                // Add other user data objects here
+            ];
+
+            let found = false;
+            userData.forEach(user => {
+                // Use localeCompare for case-insensitive comparison
+                if (user.name.localeCompare(name, undefined, { sensitivity: 'base' }) === 0) {
+                    found = true;
+                    const row = table.insertRow();
+                    row.insertCell(0).textContent = user.name;
+                    row.insertCell(1).textContent = user.latitude;
+                    row.insertCell(2).textContent = user.longitude;
+                    row.insertCell(3).textContent = user.time;
+                    row.insertCell(4).textContent = user.maktab;
+                    row.insertCell(5).textContent = user.flight;
+                    row.insertCell(6).textContent = user.mutawwif;
+                    row.insertCell(7).textContent = user.mutawwifNumber;
+                }
+            });
+
+            if (!found) {
+                const row = table.insertRow();
+                row.insertCell(0).colSpan = 8; // Span across all columns
+                row.cells[0].textContent = "No data found for this user.";
+            }
+        }
+
+        // Call populateTable when the page loads
+        window.onload = populateTable;
+    </script>
+
+</body>
+</html>

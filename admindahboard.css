@@ -1,0 +1,109 @@
+/* Basic styles and background */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.85); /* Semi-transparent background for readability */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 900px;
+    z-index: 1; /* Brings content above the video */
+    text-align: center;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    margin: 10px 0;
+}
+
+.logo-button {
+    width: 120px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.back-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #e53935;
+}
+
+/* Table styles */
+.scrollable-table {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50; /* Green background for header */
+    color: white;
+    border-top-left-radius: 8px;  /* Rounded corners for the top left */
+    border-top-right-radius: 8px; /* Rounded corners for the top right */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Slightly darker gray for hover effect */
+}
+
+/* Mobile Responsive Design */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .back-button, .logo-button {
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wearable GPS Lanyard System</title>
+    <link rel="stylesheet" href="find.css">
+    <style>
+        /* Full-page video background */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Behind the content */
+        }
+
+        /* Container for main content */
+        #login-section {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            flex-direction: column; /* Center content vertically */
+        }
+
+        /* Logo styling */
+        .logo {
+            margin-bottom: 20px; /* Space below the logo */
+            max-width: 150px; /* Limit logo size */
+        }
+
+        /* Input container styling */
+        .input-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Limit input container width */
+        }
+
+        /* Input styling */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Make the input full width */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Make the IC Number box longer */
+        input[type="password"] {
+            padding-right: 40px; /* Space for the eye icon */
+        }
+
+        /* Eye Icon Styles */
+        #toggle-eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px; /* Smaller size for eye icon */
+            height: auto; /* Maintain aspect ratio */
+            cursor: pointer;
+        }
+
+        /* Button styles */
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Button Hover Effect */
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* New User Link */
+        .new-user-box {
+            margin-top: 10px;
+        }
+
+        .new-user-btn {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .new-user-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <video class="background-video" autoplay muted loop>
+        <source src="img/home gif background.mp4" type="video/mp4">
+    </video>
+
+    <!-- Main Content Section -->
+    <section id="login-section">
+        <a href="home.html">
+            <img src="img/safetrack.png.png" alt="Safetrack Logo" class="logo">
+        </a>
+        <h2>Safetrack Hajj & Umrah</h2>
+        <p id="error-message" style="color: red; display: none;">Wrong name or IC number</p>
+        
+        <form id="login-form" onsubmit="return validateLogin(event)">
+            <input type="text" id="username" placeholder="Enter Full Name" required autocomplete="off">
+            <div class="input-container">
+                <input type="password" id="pin" placeholder="Enter IC Number" required autocomplete="off">
+                <img src="img/eye-closed.png" id="toggle-eye-icon" class="toggle-eye-icon" 
+                     alt="Show IC Number" onclick="toggleICNumber()">
+            </div>
+            <button type="submit">Find</button>
+        </form>
+
+        <div class="new-user-box">
+            <a href="signup.html" class="new-user-btn">New User?</a>
+        </div>
+    </section>
+
+    <script>
+        const validUsers = {
+            "AMIRHAZIQ MUKHRIZ BIN MOHTEE": { ic: "041212031249", lat: 2.9034364, lng: 101.8634869 },
+            "NIK MUHAMMAD MIKHAEIL BIN MOHD AZRI": { ic: "040315030000", lat: 3.1555972, lng: 101.6979658 },
+            "MUHAMMAD FARIS DANIEL BIN JOHAN WAHYUDI": { ic: "041015030000", lat: 6.0520661, lng: 102.1645676 },
+            "NURNAZMEENA ADIBA BINTI MOHD SALEH": { ic: "030510030000", lat: 49.0503553, lng: 7.4273033 },
+            "MUHAMMAD ARIFF LUQMAN BIN MUHAMAD AZRRUL": { ic: "041225030000", lat: 6.0405904, lng: 102.1287054 },
+            "NIK NUR KHADIJA AISHA BINTI NIK MOHD SABRI": { ic: "040411030000", lat: 6.0426299, lng: 102.1407438 },
+        };
+
+        function validateLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.toUpperCase();
+            const pin = document.getElementById('pin').value;
+
+            // Check if the username and pin match the valid users
+            if (validUsers[username] && validUsers[username].ic === pin) {
+                const { lat, lng } = validUsers[username];
+                // Redirect to map.html with parameters including coordinates
+                window.location.href = `map.html?name=${encodeURIComponent(username)}&ic=${encodeURIComponent(pin)}&lat=${lat}&lng=${lng}`;
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+            return false;
+        }
+
+        function toggleICNumber() {
+            const pinInput = document.getElementById('pin');
+            const eyeIcon = document.getElementById('toggle-eye-icon');
+
+            if (pinInput.type === 'password') {
+                pinInput.type = 'text';
+                eyeIcon.src = 'img/eye open.jpeg'; // Replace with path to your open eye icon
+                eyeIcon.alt = 'Hide IC Number';
+            } else {
+                pinInput.type = 'password';
+                eyeIcon.src = 'img/eye close.jpeg'; // Replace with path to your closed eye icon
+                eyeIcon.alt = 'Show IC Number';
+            }
+        }
+    </script>
+
+</body>
+</html>

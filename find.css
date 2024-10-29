@@ -1,0 +1,163 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: transparent;
+    overflow: hidden; /* Prevent scrolling */
+}
+
+/* Full-page video background */
+#background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Cover entire viewport */
+    z-index: -1; /* Send behind all other elements */
+}
+
+/* Centered Login Section */
+#login-section {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #fff;
+}
+
+/* Container styles */
+.container {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1; /* Bring content above the video */
+}
+
+/* Logo Styles */
+.container img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+/* Heading */
+.container h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Form Styles */
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Input styling */
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Make the input full width */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Make the IC Number box longer */
+input[type="password"] {
+    padding-right: 40px; /* Space for the eye icon */
+}
+
+/* Input container with eye icon */
+.input-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Eye Icon Styles */
+#toggle-eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Smaller size for eye icon */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer;
+}
+
+/* Button styles */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Button Hover Effect */
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* New User Link */
+.new-user-box {
+    margin-top: 10px;
+}
+
+.new-user-btn {
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.new-user-btn:hover {
+    text-decoration: underline;
+}
+
+/* Home Button */
+.home-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Search - Safetrack</title>
+    <link rel="stylesheet" href="adminsearch.css">
+</head>
+<body>
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="img/home gif background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <a href="home.html">
+            <img src="img/safetrack.png.png" alt="Logo" class="logo">
+        </a>
+        <h1>SEARCH FOR WEARER</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="ENTER NAME..." onkeyup="showSuggestions(this.value)" autocomplete="off">
+            <div id="autocomplete-list" class="autocomplete-list"></div>
+            <button class="button search-button" onclick="performSearch()">SEARCH</button>
+        </div>
+    </div>
+
+    <script>
+        const users = [
+        "AMIRHAZIQ MUKHRIZ BIN MOHTEE",
+            "NIK MUHAMMAD MIKHAEIL BIN MOHD AZRI",
+            "MUHAMMAD FARIS DANIEL BIN JOHAN WAHYUDI",
+            "MUHAMMAD HAKIMI BIN MOHD HASSAN",
+            "NURNAZMEENA ADIBA BINTI MOHD SALEH",
+            "MUHAMMAD ARIFF LUQMAN BIN MUHAMAD AZRRUL",
+            "NIK NUR KHADIJA AISHA BINTI NIK MOHD SABRI",
+            "NUR IMANINA SAFIYA BINTI ZAIDI",
+            "NUR ADLIN EZZYLIA BINTI BADRUN",
+            "MUHAMMAD FAKRUL RAZI BIN MUHAMAD RAZALI",
+            "NUR SHAZRIN BINTI ABDUL HALIM",
+            "NUR AMININ NAJLA BINTI ADZMI",
+            "NUR ROHADATUL AISYAH BINTI NAZERI",
+            "NURSYAZWANI BINTI MOHD ROSEKI",
+            "MAISARAH AIDA BINTI SAJALI",
+            "MUHAMMAD ZHARFAN BIN MOHD ZAIDI",
+            "AYU AWATIF BINTI ALIAS",
+            "ARISSRA A/P PINGO",
+            "MUHAMMAD ARRABI BIN ABDUL HALIM",
+            "AINNUR HANIS BINTI ADNAN",
+            "'AINA MUNIRAH BINTI ABDUL LATIF",
+            "MUHAMMAD ASYRAAF BIN MOHAMED SAJAHAN",
+            "NOR AISHAH BINTI ADNAN",
+            "NUR ARIQAH FAIHA BINTI AMIR HAMZAH",
+            "SITI AISYAH BINTI MUHAMAD 'ARIF",
+            "NURUL HUDA BINTI MOHD ZAHID",
+            "SARAH ASYQIN BINTI SA'AZHAR",
+            "NURSYAZWANI BALQIS BINTI MOHD NASHARUDIN",
+            "ARNIJASICA BINTI YUSOP",
+            "IZZATI MAISARAH BINTI SULAIMAN",
+            "SYAKIRAH BINTI ABDUL JALIL",
+            "NUR NAJIHAH HANIM BINTI NAZRI",
+            "ALDRIN HAFIE BIN ABDUL HIJAZ",
+            "NUR SYAZLIANA BINTI ABDULLAH",
+            "HANIS NAJIHAH BINTI MOHD NAZRI",
+            "CHANAFONTHISA A/P SOOM NEK",
+            "NUR AINA QISTINA BINTI AMER",
+            "NUR ALIA AKMAL BINTI AHMAD LUFPI",
+            "NUR SYAFI WAZINI BINTI MAULID",
+            "IDYANA FATNIN BINTI MUBIN",
+            "NUR HAFIZAH BINTI AUDIE",
+            "KU NURAINI BALQIS BINTI KU MOHAMMAD SHAH"
+        ];
+
+        function showSuggestions(value) {
+            const suggestionsContainer = document.getElementById("autocomplete-list");
+            suggestionsContainer.innerHTML = '';
+            if (!value) return;
+
+            const filteredUsers = users.filter(user => user.toLowerCase().startsWith(value.toLowerCase()));
+            filteredUsers.forEach(user => {
+                const suggestionItem = document.createElement("div");
+                suggestionItem.textContent = user;
+                suggestionItem.classList.add("autocomplete-item");
+                suggestionItem.onclick = () => {
+                    document.getElementById("searchInput").value = user;
+                    suggestionsContainer.innerHTML = '';
+                };
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+        }
+
+        function performSearch() {
+            const input = document.getElementById("searchInput").value.trim();
+            if (input) {
+                location.href = `admindashboard.html?name=${encodeURIComponent(input)}`;
+            }
+        }
+    </script>
+
+    <style>
+        /* Styles for the adminsearch page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #backgroundVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            z-index: 1;
+            position: relative;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-container {
+            position: relative;
+            text-align: center;
+        }
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        .autocomplete-list {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-height: 150px;
+            overflow-y: auto;
+            position: absolute;
+            z-index: 1;
+            background-color: white;
+            width: 300px;
+            margin-top: 5px;
+        }
+        .autocomplete-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .autocomplete-item:hover {
+            background-color: #f0f0f0;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</body>
+</html>

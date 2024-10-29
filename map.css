@@ -1,0 +1,76 @@
+/* Reset some default styles */
+body, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styles */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the back button */
+.back-button {
+    position: absolute;
+    top: 10px; /* Keep it from being too close to the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for the button width */
+}
+
+/* Wearer info styles */
+.wearer-info {
+    text-align: center;
+    margin: 20px 0; /* Add some margin above the map */
+    background-color: #fff; /* White background for better visibility */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.wearer-info p {
+    margin: 5px 0; /* Space between info lines */
+}
+
+/* Button styles */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.stop-button {
+    margin-top: 20px;
+    background-color: #f44336;
+    color: white;
+}
+
+.stop-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Map container styles */
+#map {
+    width: 100%;
+    height: 80vh;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headline styles */
+h2 {
+    margin: 20px 0;
+    font-size: 24px;
+    color: #333;
+}

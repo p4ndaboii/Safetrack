@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map - Safetrack System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="map.css"> <!-- Add your map.css file here -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Changed to flex-start to position at the top */
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f8f8;
+            font-family: Arial, sans-serif;
+        }
+        .logo {
+            width: 150px; /* Adjust logo size as needed */
+            margin: 20px 0; /* Margin for spacing */
+            cursor: pointer; /* Change cursor to pointer for clickable */
+        }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #map {
+            width: 100%;
+            height: 70vh; /* Adjusted height */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 20px; /* Space from top content */
+        }
+        .stop-button {
+            margin-top: auto; /* Pushes the button to the bottom */
+            padding: 10px;
+            background-color: #f44336; /* Red color for stop */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%; /* Make it wider */
+            max-width: 300px; /* Max width limit */
+        }
+        .info {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .info h3 {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo as Home Button -->
+    <img src="img/safetrack.png.png" alt="Safetrack Logo" class="logo" onclick="window.location.href='home.html'">
+
+    <h2>Map - Safetrack Location</h2>
+
+    <!-- Display Name and IC Number -->
+    <div class="info">
+        <h3>Wearer Location</h3>
+        <h4 id="wearer-name"></h4>
+        <h4 id="wearer-ic"></h4>
+    </div>
+
+    <button class="back-button" onclick="window.history.back();">Back</button>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Stop Finding Button -->
+    <button class="stop-button" onclick="stopFinding()">Stop Finding</button>
+
+    <script>
+        // Get URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const wearerName = params.get('name');
+        const wearerIC = params.get('ic');
+        const lat = parseFloat(params.get('lat')); // Retrieve latitude
+        const lng = parseFloat(params.get('lng')); // Retrieve longitude
+
+        // Set the wearer name and IC number in the respective elements
+        document.getElementById('wearer-name').textContent = `Name: ${wearerName}`;
+        document.getElementById('wearer-ic').textContent = `IC Number: ${wearerIC}`;
+
+        // Initialize your map here
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: lat || -34.397, lng: lng || 150.644 }, // Use provided coordinates or default
+                zoom: 8,
+            });
+
+            // Add a marker for the wearer's location
+            const marker = new google.maps.Marker({
+                position: { lat: lat || -34.397, lng: lng || 150.644 },
+                map: map,
+                title: wearerName,
+            });
+        }
+
+        // Load the Google Maps API script
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAI-rl3UjRviDsfFfNQrJf5XMzkZqZyAbY&callback=initMap`;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        // Function to handle stopping finding
+        function stopFinding() {
+            alert('Finding stopped. Returning to home.');
+            window.location.href = 'home.html'; // Redirect to home or any other action you want
+        }
+    </script>
+</body>
+</html>

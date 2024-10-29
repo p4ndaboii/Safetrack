@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Wearable GPS Lanyard System</title>
+    <link rel="stylesheet" href="signup.css">
+    <style>
+        /* Basic Reset for Body and HTML */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the video covers the entire area */
+            z-index: -1; /* Send the video behind other elements */
+        }
+
+        /* Sign Up Container */
+        .signup-container {
+            position: relative;
+            z-index: 1; /* Bring the signup container above the video */
+            text-align: center; /* Center the content */
+            color: white; /* Adjust text color for visibility */
+        }
+
+        /* Add any additional styles you want for the form */
+        /* Example styles below */
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <video autoplay muted loop class="video-background">
+        <source src="img/home gif background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="signup-container">
+        <!-- Logo as Home Button -->
+        <img src="img/safetrack.png.png" alt="Logo" class="logo" onclick="window.location.href='home.html'">
+        
+        <!-- Sign Up Form -->
+        <h2>Sign Up</h2>
+        <form id="signup-form" onsubmit="return saveUser(event)">
+            <input type="text" id="fullName" placeholder="Enter Full Name" required>
+            <input type="text" id="icNumber" placeholder="Enter IC Number" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function saveUser(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('fullName').value;
+            const icNumber = document.getElementById('icNumber').value;
+
+            localStorage.setItem('username', fullName);
+            localStorage.setItem('pin', icNumber);
+
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+</html>
